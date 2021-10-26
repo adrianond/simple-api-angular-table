@@ -1,0 +1,6 @@
+--CREATE TABLE elementos_tabela_periodica (
+  --id INT AUTO_INCREMENT  PRIMARY KEY,
+  --name VARCHAR(250) NOT NULL,
+  --symbol VARCHAR(250) NOT NULL,
+  --weight number NOT NULL
+--);
