@@ -3,6 +3,7 @@ package com.example.http;
 import com.example.domain.ElementoTabelaPeriodicaDTO;
 import com.example.domain.request.ElementoTabelaPeriodicaRequest;
 import com.example.domain.response.ElementoTabelaPeriodicaResponse;
+import com.example.domain.response.ElementosTabelaPeriodicaResponse;
 import com.example.usecase.tabelaperiodica.AlterarElementoTabelaPeriodica;
 import com.example.usecase.tabelaperiodica.ConsultarElementosTabelaPeriodica;
 import com.example.usecase.tabelaperiodica.ExcluirElementoTabelaPeriodica;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@CrossOrigin
 @RestController
-@RequestMapping(path = "/api/periodic/table")
+@RequestMapping(path = "/api/periodic/elements")
 @AllArgsConstructor
 public class ElementoTabelaPeriodicaWS {
     private final SalvarElementoTabelaPeriodica salvarElementoTabelaPeriodica;
@@ -24,24 +26,24 @@ public class ElementoTabelaPeriodicaWS {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ElementoTabelaPeriodicaResponse adicionarElemento(@Valid @RequestBody ElementoTabelaPeriodicaRequest elementoTabelaPeriodicaRequest) {
-        return new ElementoTabelaPeriodicaResponse(salvarElementoTabelaPeriodica.executar(elementoTabelaPeriodicaRequest));
+    public ElementoTabelaPeriodicaResponse adicionarElemento(@Valid @RequestBody ElementoTabelaPeriodicaDTO request) {
+        return new ElementoTabelaPeriodicaResponse(salvarElementoTabelaPeriodica.executar(request));
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ElementoTabelaPeriodicaResponse consultar() {
-        return new ElementoTabelaPeriodicaResponse(consultarElementosTabelaPeriodica.executar());
+    public ElementosTabelaPeriodicaResponse consultar() {
+        return new ElementosTabelaPeriodicaResponse(consultarElementosTabelaPeriodica.executar());
     }
 
 
-    @DeleteMapping(path = "/element/{id}")
+    @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void excluirElemento(@PathVariable("id") Integer id) {
         excluirElementoTabelaPeriodica.executar(id);
     }
 
-    @PutMapping(path = "/element/{id}")
+    @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void alterarElemento(@PathVariable("id") Integer id,
                                              @Valid @RequestBody ElementoTabelaPeriodicaDTO request) {

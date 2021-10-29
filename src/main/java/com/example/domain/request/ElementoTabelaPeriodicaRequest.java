@@ -8,5 +8,5 @@ import java.util.List;
 
 @Data
 public class ElementoTabelaPeriodicaRequest {
-    private List<ElementoTabelaPeriodicaDTO> elementosTabelaPeriodica = new ArrayList<>();
+    private List<ElementoTabelaPeriodicaDTO> elementos = new ArrayList<>();
 }

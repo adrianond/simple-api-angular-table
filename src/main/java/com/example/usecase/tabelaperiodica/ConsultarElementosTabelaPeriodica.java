@@ -6,6 +6,7 @@ import com.example.domain.converter.TabelaPeriodicaConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -15,6 +16,11 @@ public class ConsultarElementosTabelaPeriodica {
     private final TabelaPeriodicaRepository repository;
 
     public List<ElementoTabelaPeriodicaDTO> executar() {
-        return converter.buildDTO(repository.findAll());
+        List<ElementoTabelaPeriodicaDTO> list = new ArrayList<>();
+
+       repository.findAll().forEach(elementoTabelaPeriodicaDTO ->
+                list.add(converter.buildDTO(elementoTabelaPeriodicaDTO)));
+
+        return list;
     }
 }

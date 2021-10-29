@@ -17,6 +17,7 @@ public class AlterarElementoTabelaPeriodica {
     public void executar(ElementoTabelaPeriodicaDTO request, Integer id) {
         TabelaPeriodica elemento = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Elemento não encontrado"));
+        elemento.setId(id);
         elemento.setName(request.getName());
         elemento.setSymbol(request.getSymbol());
         elemento.setWeight(request.getWeight());
